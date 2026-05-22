@@ -1,0 +1,5802 @@
+[
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 1,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 2,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 3,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 4,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 5,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 6,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 7,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 8,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 9,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 10,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 1,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 2,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 3,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 4,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 5,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 6,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 7,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 8,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 9,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen4_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen4_1.pddl",
+    "num": 4,
+    "index": 1,
+    "trial": 10,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 1,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 2,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 3,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 4,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 5,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 6,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 7,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 8,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 9,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen5_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen5_1.pddl",
+    "num": 5,
+    "index": 1,
+    "trial": 10,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 1,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 2,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 3,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 4,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 5,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 6,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 7,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 8,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 9,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  },
+  {
+    "problem_name": "kitchen6_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/kitchen/problem/kitchen6_1.pddl",
+    "num": 6,
+    "index": 1,
+    "trial": 10,
+    "table_body": 1,
+    "objects": {
+      "celery": {
+        "bid": 4,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "radish": {
+        "bid": 5,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "bacon": {
+        "bid": 6,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.0,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "egg": {
+        "bid": 7,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            -0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "chicken": {
+        "bid": 8,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            -0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apple": {
+        "bid": 9,
+        "size": [
+          0.06,
+          0.06000000000000005,
+          0.1
+        ],
+        "pose": {
+          "position": [
+            0.15,
+            0.5,
+            0.051000000000000004
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "celery": "table",
+      "radish": "table",
+      "bacon": "table",
+      "egg": "table",
+      "chicken": "table",
+      "apple": "table"
+    },
+    "goal_raw": "(:goal\n        (and\n            (cooked bacon)\n            (cooked egg)\n            (cooked chicken)\n            (cooked radish)\n            (cooked celery)\n            (cooked apple)\n        )\n    )"
+  }
+]
