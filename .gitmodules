@@ -1,0 +1,6 @@
+[submodule "LLM-TAMP"]
+	path = LLM-TAMP
+	url = https://github.com/Minseo10/LLM-TAMP.git
+[submodule "pddlstream"]
+	path = pddlstream
+	url = https://github.com/Minseo10/pddlstream.git
