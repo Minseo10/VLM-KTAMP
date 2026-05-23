@@ -72,13 +72,15 @@ def run(domain="blocksworld_pr",
                 prob_idx_range=prob_idx_range,
                 trial_range=trial_range,
                 repeat_range=repeat_range,
+                model=model,
             )
         elif domain == "kitchen":
             run_kitchen(
                 prob_num_range=prob_num_range,
                 prob_idx_range=prob_idx_range,
                 trial_range=trial_range,
-                repeat_range=repeat_range
+                repeat_range=repeat_range,
+                model=model,
             )
     else:
         print(f"Unknown method: {method}")

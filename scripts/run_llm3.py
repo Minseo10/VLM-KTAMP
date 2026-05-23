@@ -15,6 +15,7 @@ def run_blocksworld(prob_num_range=[3, 4, 5, 6],
                     prob_idx_range=[1, 2, 3, 4, 5],
                     trial_range=[1, 2],
                     repeat_range=[1],
+                    model="gpt-4o",
                     timeout_seconds=600):
     """
     python main.py --config-name=llm_tamp_blocksworld env=easy_box_small_basket \
@@ -34,6 +35,7 @@ def run_blocksworld(prob_num_range=[3, 4, 5, 6],
         _fmt_list_override("trial", trial_range),
         _fmt_list_override("repeat", repeat_range),
         f"timeout_sec={timeout_seconds}",
+        f"llm_model={model}",
         "overwrite_instances=true",
         "play_traj=true",
         "use_gui=true",
@@ -54,6 +56,7 @@ def run_kitchen(prob_num_range=[3, 4, 5, 6],
                 prob_idx_range=[1],
                 trial_range=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                 repeat_range=[1],
+                model="gpt-4o",
                 timeout_seconds=600):
     """
     python main.py --config-name=llm_tamp_kitchen env=easy_box_small_basket \
@@ -73,6 +76,7 @@ def run_kitchen(prob_num_range=[3, 4, 5, 6],
         _fmt_list_override("trial", trial_range),
         _fmt_list_override("repeat", repeat_range),
         f"timeout_sec={timeout_seconds}",
+        f"llm_model={model}",
         "overwrite_instances=true",
         "play_traj=true",
         "use_gui=true",
