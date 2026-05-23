@@ -22,7 +22,7 @@ COLOR_MAP = {
 }
 
 class KUKA:
-    def __init__(self):
+    def __init__(self, vis_sim=False):
 
         # Special configurations
 
@@ -42,7 +42,7 @@ class KUKA:
                 max_FPS=200,
                 run_in_thread=True,
             ),
-            show_viewer=True,
+            show_viewer=vis_sim,
             show_FPS = False,
             sim_options=gs.options.SimOptions(
                 dt=0.01,
@@ -102,7 +102,7 @@ class KUKA:
                 color=(0.6, 0.1, 0.1),
             ),
         )
-        self.object_dict["mysink"] = self.sink
+        self.object_dict["mysink"] = self.sink.idx
 
         self.stove = self.scene.add_entity(
             morph=gs.morphs.Box(
@@ -115,7 +115,7 @@ class KUKA:
                 color=(0.1, 0.1, 0.6),
             ),
         )
-        self.object_dict["mystove"] = self.stove
+        self.object_dict["mystove"] = self.stove.idx
 
         # cameras
         self.cam_front = self.scene.add_camera(
@@ -244,11 +244,11 @@ class KUKA:
         )
         return qpos
 
-    def motion_planning(self, qpos, left=True, holding=False, planner="RRTConnect", held_entity=None):
+    def motion_planning(self, qpos, left=True, holding=False, planner="RRTConnect", ee_link_name=None, with_entity=None):
         if holding:
-            path = self.robot.plan_path(qpos, planner=planner, ignore_collision=True, held_entity=held_entity)
+            path = self.robot.plan_path_ompl(qpos, planner=planner, ignore_collision=True, ee_link_name=ee_link_name, with_entity=with_entity)
         else:
-            path = self.robot.plan_path(qpos, planner=planner, held_entity=held_entity)
+            path = self.robot.plan_path_ompl(qpos, planner=planner, ee_link_name=ee_link_name, with_entity=with_entity)
         return path
 
     def move(self, path, n=None, take_screenshot=False, action_name=None, count_start=0):
@@ -264,13 +264,11 @@ class KUKA:
                 for i in range(n)
             )
         else:
-            screenshot_indices = set()  # 스크린샷 찍지 않을 때
+            screenshot_indices = set()
 
-        # take_screenshot = True 이면 n등분 해서 사진 찍기
         for i, waypoint in enumerate(path):
             self.robot.control_dofs_position(waypoint)
             self.scene.step()
-            # n등분 지점이라면 스크린샷 촬영
             if i in screenshot_indices and take_screenshot:
                 self.capture_screenshot(screenshot_dir, action_name, count)
                 count += 1
@@ -287,14 +285,14 @@ class KUKA:
         print("ee_pose", ee_pose)
         return ee_pose
 
-    def safe_plan(self, qpos_goal, qpos_start=None, planner="RRTConnect", ignore_collision=False, only_left=False, only_right=False, held_entity=None):
+    def safe_plan(self, qpos_goal, qpos_start=None, planner="RRTConnect", ignore_collision=False, only_left=False, only_right=False, ee_link_name=None, with_entity=None):
         try:
             if qpos_start is not None:
-                traj = self.robot.plan_path(qpos_goal=qpos_goal, qpos_start=qpos_start,
-                                       planner=planner, ignore_collision=ignore_collision, held_entity=held_entity)
+                traj = self.robot.plan_path_ompl(qpos_goal=qpos_goal, qpos_start=qpos_start,
+                                       planner=planner, ignore_collision=ignore_collision)
             else:
-                traj = self.robot.plan_path(qpos_goal=qpos_goal,
-                                       planner=planner, ignore_collision=ignore_collision, held_entity=held_entity)
+                traj = self.robot.plan_path_ompl(qpos_goal=qpos_goal,
+                                       planner=planner, ignore_collision=ignore_collision)
             if traj is None or (hasattr(traj, "__len__") and len(traj) == 0):
                 return False, "empty_or_none_trajectory"
 
@@ -302,14 +300,14 @@ class KUKA:
         except Exception as e:
             return False, f"{type(e).__name__}: {e}"
 
-    def save_snapshot4(self, save_to_dir, node_name):
+    def save_snapshot4(self, save_to_dir, node_name, world=None):
         self.cam_front.save_snapshot(save_to_filename=f"{save_to_dir}/{node_name}_front")
         self.cam_top.save_snapshot(save_to_filename=f"{save_to_dir}/{node_name}_top")
         self.cam_left.save_snapshot(save_to_filename=f"{save_to_dir}/{node_name}_left")
         self.cam_right.save_snapshot(save_to_filename=f"{save_to_dir}/{node_name}_right")
 
-        file_path_list = [f"{save_to_dir}/{node_name}_front_rgb.png", f"{save_to_dir}/{node_name}_top_rgb.png",
-                          f"{save_to_dir}/{node_name}_left_rgb.png", f"{save_to_dir}/{node_name}_right_rgb.png"]
+        file_path_list = [f"{save_to_dir}/{node_name}_front_rgb.jpg", f"{save_to_dir}/{node_name}_top_rgb.jpg",
+                          f"{save_to_dir}/{node_name}_left_rgb.jpg", f"{save_to_dir}/{node_name}_right_rgb.jpg"]
         for file_path in file_path_list:
             self.annotate_image(file_path, node_name)
 
@@ -337,7 +335,7 @@ def to_wxyz(q_xyzw):
     # PyBullet: (x, y, z, w) → Genesis: (w, x, y, z)
     return (q_xyzw[3], q_xyzw[0], q_xyzw[1], q_xyzw[2])
 
-def start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distractor=0):
+def start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distractor=0, vis_sim=False):
     # load json file and bring entry
     with open(json_path, "r", encoding="utf-8") as f:
         meta = json.load(f)
@@ -349,7 +347,7 @@ def start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distract
 
     # Initialize
     gs.init(backend=gs.gpu)
-    kuka = KUKA()
+    kuka = KUKA(vis_sim=vis_sim)
 
     # add foods
     kuka.object_dict = getattr(kuka, "object_dict", {})
@@ -368,7 +366,7 @@ def start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distract
                 color=col,
             ),
         )
-        kuka.object_dict[name] = ent
+        kuka.object_dict[name] = ent.idx
 
     # add distractors
     xs = [-0.15, 0.0, 0.15]  # fixed
@@ -389,7 +387,7 @@ def start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distract
                     color=(0.5, 0.5, 0.5, 1),
                 ),
             )
-            kuka.object_dict[f"dis{i}"] = ent
+            kuka.object_dict[f"dis{i}"] = ent.idx
             i += 1
 
     # Build the scene
@@ -402,7 +400,8 @@ def start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distract
 
     # set pose of the blocks
     for name, info in blocks_info.items():
-        ent = kuka.object_dict[name]
+        idx = kuka.object_dict[name]
+        ent = kuka.scene.entities[idx]
         pos = np.array(info["pose"]["position"], dtype=float)
         q_xyzw = info["pose"]["quaternion"]
         q_wxyz = np.array(to_wxyz(q_xyzw), dtype=float)

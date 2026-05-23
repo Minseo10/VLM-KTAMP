@@ -1,11 +1,20 @@
 import os
 import sys
 import json
-import csv
 import time
 import logging
 from pathlib import Path
+
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from unified_planning.io import PDDLReader
 import genesis as gs
+from utils.experiment_utils import *
+import multiprocessing as mp 
+import argparse
+from symbolic import upstate_to_grouped_facts
+
 
 logger = logging.getLogger("TAMP")
 logger.setLevel(logging.INFO)
@@ -15,7 +24,6 @@ if not logger.handlers:
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import hybrid_tree as ht
 from hybrid_tree_generation import (
     diverse_planning,
@@ -24,25 +32,6 @@ from hybrid_tree_generation import (
     grouped_facts_to_str
 )
 import networkx as nx
-import signal
-from contextlib import contextmanager
-
-@contextmanager
-def time_limit(seconds: int):
-    """Context manager for timeout."""
-    def _handler(signum, frame):
-        raise TimeoutError(f"timeout after {seconds}s")
-    old = signal.signal(signal.SIGALRM, _handler)
-    signal.setitimer(signal.ITIMER_REAL, float(seconds), 0.0)
-    try:
-        yield
-    finally:
-        signal.setitimer(signal.ITIMER_REAL, 0.0, 0.0)
-        signal.signal(signal.SIGALRM, old)
-
-
-def ensure_dir(p: Path):
-    p.parent.mkdir(parents=True, exist_ok=True)
 
 
 def extract_final_plan_with_params(hybrid: ht.HybridTree):
@@ -71,8 +60,8 @@ def extract_final_plan_with_params(hybrid: ht.HybridTree):
             "action": chosen_key,
             "feasible": bool(chosen_attrs.get("feasible", True)),
             "continuous_params": chosen_attrs.get("continuous_params", {}),
-            "from_state": grouped_facts_to_str(u.discrete_state),
-            "to_state": grouped_facts_to_str(v.discrete_state),
+            "from_state": upstate_to_grouped_facts(u.discrete_belief.state),
+            "to_state": upstate_to_grouped_facts(v.discrete_belief.state),
             "result_images": getattr(v, "image_path", None),
         })
     return plan
@@ -92,9 +81,11 @@ def run_one(domain: str,
             ablation: bool = False,
             num_distractor: int = 0,
             robot_name: str = 'pr2',
-            model: str = 'gpt-4o'):
+            model: str = 'gpt-4o',
+            vis_sim: bool = False
+            ):
 
-    base_exp_dir = Path(f"../experiments/{domain}")
+    base_exp_dir = Path(f"./experiments/{domain}")
     log_dir = base_exp_dir / method / "batch_outputs" / f"{prob_num}_{prob_idx}" / f"trial{trial}_repeat{repeat}"
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / "run.log"
@@ -106,11 +97,15 @@ def run_one(domain: str,
     
     logger.info(f"Starting experiment: domain={domain}, method={method}, prob_num={prob_num}, prob_idx={prob_idx}, trial={trial}, repeat={repeat}")
 
-    base_exp_dir = Path(f"../experiments/{domain}")
-    plan_dir = base_exp_dir / f"{method}"/ "plan"
+    # Use absolute paths from project root
+    script_dir = Path(__file__).parent
+    project_root = script_dir.parent
+    
+    base_exp_dir = project_root / "experiments" / domain
+    plan_dir = base_exp_dir / method / "plan"
     problem_pddl_path = base_exp_dir / "problem" / f"{domain}{prob_num}_{prob_idx}.pddl"
-    domain_pddl_path = Path(f"../domains/domain_{domain}.pddl")
-    out_dir = base_exp_dir /  f"{method}" / "batch_outputs" / f"{prob_num}_{prob_idx}" / f"trial{trial}_repeat{repeat}"
+    domain_pddl_path = project_root / "domains" / f"domain_{domain}.pddl"
+    out_dir = base_exp_dir / method / "batch_outputs" / f"{prob_num}_{prob_idx}" / f"trial{trial}_repeat{repeat}"
     out_dir.mkdir(parents=True, exist_ok=True)
     hybrid_img_path = out_dir / "hybrid_tree.png"
     final_plan_json = out_dir / "final_plan.json"
@@ -118,7 +113,7 @@ def run_one(domain: str,
     video_path = out_dir / "video.mp4"
 
     start = time.time()
-    plans, gv_path = diverse_planning(domain, method, prob_num, prob_idx, plan_number=plan_number, planner=diverse_planner)
+    plans, gv_path = diverse_planning(domain, method, problem_pddl_path, plan_number=plan_number, planner=diverse_planner)
     end = time.time()
     diverse_planning_time = end - start
     logger.info(f"Diverse planning time: {diverse_planning_time:.2f}s")
@@ -147,6 +142,7 @@ def run_one(domain: str,
         trial=trial,
         repeat=repeat,
         model=model,
+        vis_sim=vis_sim,
         domain_name=domain,
         robot_name=robot_name,
         grasp_type='top',
@@ -168,7 +164,7 @@ def run_one(domain: str,
     logger.info(f"TAMP subgoal success: {tamp_success}")
     logger.info("Experiment finished")
 
-    ensure_dir(hybrid_img_path)
+    hybrid_img_path.parent.mkdir(parents=True, exist_ok=True)
     try:
         hybrid.visualize_tree(str(hybrid_img_path))
     except Exception as e:
@@ -210,30 +206,8 @@ def run_one(domain: str,
         "backtrack_count": backtrack_count,
     }
 
-import multiprocessing as mp
-import traceback
-import argparse
 
-def _run_one_worker(kwargs, q):
-    """Child process entry. Always puts a result or an error into q."""
-    try:
-        res = run_one(**kwargs)
-        q.put(("ok", res))
-    except Exception as e:
-        q.put(("err", f"{e}\n{traceback.format_exc()}"))
-
-def _append_csv_row(csv_path: Path, fieldnames, row: dict):
-    csv_path.parent.mkdir(parents=True, exist_ok=True)
-    file_exists = csv_path.exists()
-    with open(csv_path, "a", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames)
-        if not file_exists:
-            w.writeheader()
-        w.writerow({k: row.get(k, "") for k in fieldnames})
-        f.flush()
-        os.fsync(f.fileno())
-
-def run_batch(domain="blocksworld_pr",
+def run_ours_batch(domain="blocksworld_pr",
               method="ours",
               problems_meta_json=None,
               prob_num_range=None,
@@ -242,10 +216,12 @@ def run_batch(domain="blocksworld_pr",
               K=4,
               plan_number=30,
               timeout_seconds=10,
-              model="gpt-4o"):
+              model="gpt-4o",
+              vis_sim=False
+              ):
     
     if problems_meta_json is None:
-        problems_meta_json = f"../experiments/{domain}/problem/problems_meta.json"
+        problems_meta_json = f"./experiments/{domain}/problem/problems_meta.json"
     
     ablation = (method == "ablation")
     robot_name = "pr2" if domain == "blocksworld_pr" else "kuka"
@@ -255,11 +231,8 @@ def run_batch(domain="blocksworld_pr",
     diverse_planner = "topk"
     weight_threshold = 0.2
     
-    results = []
-    results_csv = Path(f"../experiments/{domain}/{method}/batch_outputs/summary.csv")
-    results_json = f"../experiments/{domain}/{method}/batch_outputs/summary.json"
+    results_csv = Path(f"./experiments/{domain}/{method}/batch_outputs/summary.csv")
     Path(results_csv).parent.mkdir(parents=True, exist_ok=True)
-    Path(results_json).parent.mkdir(parents=True, exist_ok=True)
 
     fieldnames = [
         "prob_num","prob_idx","trial", "repeat",
@@ -289,11 +262,12 @@ def run_batch(domain="blocksworld_pr",
                         num_distractor=num_distractor,
                         robot_name=robot_name,
                         model=model,
+                        vis_sim=vis_sim
                     )
 
                     ctx = mp.get_context("spawn")
                     q = ctx.Queue()
-                    p = ctx.Process(target=_run_one_worker, args=(kwargs, q))
+                    p = ctx.Process(target=run_one_worker, args=(run_one, kwargs, q))
                     p.start()
                     p.join(timeout_seconds)
 
@@ -339,9 +313,9 @@ def run_batch(domain="blocksworld_pr",
                                 "error": f"no result from child: {e}",
                             })
 
-                    _append_csv_row(results_csv, fieldnames, res)
+                    append_csv_row(results_csv, fieldnames, res)
 
-    logger.info(f"\nBatch finished. CSV: {results_csv}\nJSON: {results_json}")
+    logger.info(f"\nBatch finished. CSV: {results_csv}")
 
 
 if __name__ == "__main__":
@@ -350,7 +324,7 @@ if __name__ == "__main__":
                         choices=["blocksworld_pr", "kitchen"],
                         help="Domain name")
     parser.add_argument("--method", type=str, default="ours",
-                        choices=["ours", "ablation"],
+                        choices=["ours", "ours_ablation"],
                         help="Method name")
     parser.add_argument("--prob_complexity", type=int, nargs="+", default=list(range(3, 7)),
                         help="Number of objects (e.g. --prob_complexity 3 4 5 6)")
@@ -373,7 +347,7 @@ if __name__ == "__main__":
     prob_idx_range = range(args.prob_idx[0], args.prob_idx[1]) if args.prob_idx else None
     trial_range = range(args.trial[0], args.trial[1]) if args.trial else None
     
-    run_batch(
+    run_ours_batch(
         domain=args.domain,
         method=args.method,
         prob_num_range=prob_num_range,

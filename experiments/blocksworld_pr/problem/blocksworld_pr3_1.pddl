@@ -1,20 +1,20 @@
 (define (problem blocksworld_pr3_1)
   (:domain blocksworld-original)
   (:objects
-    green red blue
+    green red grey
   )
   (:init
     (arm-empty)
     (on-table green)
     (on red green)
     (clear red)
-    (on-table blue)
-    (clear blue)
+    (on-table grey)
+    (clear grey)
   )
   (:goal
     (and
-      (on-table blue)
-      (on red blue)
+      (on-table grey)
+      (on red grey)
       (on-table green)
     )
   )

@@ -4,9 +4,7 @@ import time
 import logging
 from dataclasses import dataclass, field
 from typing import Any, List
-from unified_planning.io import PDDLReader, PDDLWriter
 from unified_planning.shortcuts import *
-from unified_planning.engines import PlanGenerationResultStatus
 from unified_planning.model import *
 import re
 from typing import Iterable, Tuple

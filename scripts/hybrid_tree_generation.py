@@ -4,10 +4,8 @@ import logging
 
 logger = logging.getLogger("TAMP")
 
-import utils.utils
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from utils import prompts, llm_functions as llm, pr2_api as pr2, kuka_api as kuka, franka_api as franka
+from utils import prompts, pr2_api as pr2, kuka_api as kuka
 from utils.utils import *
 from collections import defaultdict, deque
 from typing import Any, List, Tuple
@@ -18,15 +16,12 @@ from pathlib import Path as pathlibPath
 import pydot
 import time
 import scripts.action as action
-import re
 import random
 from openai import OpenAI
 import genesis as gs
 import networkx as nx
 from symbolic import *
-from unified_planning.io import PDDLReader
 from unified_planning.shortcuts import *
-from unified_planning.model import State as UPState
 
 
 config_path = os.path.join(os.path.dirname(__file__), "..", "config.json")
@@ -221,6 +216,7 @@ def hybrid_tree_expansion(
     trial: int = None,
     repeat: int = None,
     model: str = None,
+    vis_sim: bool = False,
     domain_name: str = None,
     robot_name: str = None,
     grasp_type: str = None,
@@ -252,9 +248,9 @@ def hybrid_tree_expansion(
 
     # Initialize simulator and get initial state
     if robot_name == 'pr2':
-            sim_wrapper, root_image_paths = pr2.start_sim(json_path, method, prob_num, prob_idx, trial, repeat)
+            sim_wrapper, root_image_paths = pr2.start_sim(json_path, method, prob_num, prob_idx, trial, repeat, vis_sim=vis_sim)
     elif robot_name == 'kuka':
-            sim_wrapper, root_image_paths = kuka.start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distractor=num_distractor)
+            sim_wrapper, root_image_paths = kuka.start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distractor=num_distractor, vis_sim=vis_sim)
     init_scene = sim_wrapper.scene.sim.get_state()
 
     start = time.time()
@@ -270,7 +266,6 @@ def hybrid_tree_expansion(
     discrete_tree.G.nodes[discrete_tree.root]['visited'] = True
 
     while True:
-        # print(f"current node: {hybrid.current_node.name}")
         goal_ok = is_goal_state_up(hybrid.current_node.discrete_belief.state, problem_template)
         physical_ok, _ = check_state(hybrid.current_node, sim_wrapper, robot_name)
         if goal_ok and physical_ok:
@@ -286,18 +281,16 @@ def hybrid_tree_expansion(
             break
         discrete_node = matching[0]
         edges = list(discrete_tree.G.out_edges(discrete_node, keys=True, data=True))
-        # print("edges from discrete tree:", [(u.name, v.name, k, d) for u, v, k, d in edges])
         if not edges:
             break
 
-        # For motion replanning (up to 4 times)
+        # For motion replanning (up to 5 times)
         success = False
         attempt = 0
 
         while attempt < K and not success:
             attempt += 1
             candidates: List[Tuple[ht.HybridNode, bool, Any]] = []
-            # accepted_children: List[Tuple[ht.HybridNode, float, str]] = []  # (child, weight, action)
 
             # Check all symbolic edges from current node in discrete_tree
             for src, dst, action, attrs in edges:
@@ -313,16 +306,6 @@ def hybrid_tree_expansion(
                     if hybrid.current_node.detached_object is not None and "putdown" in action.split()[0]:
                         sim_wrapper.close_gripper(object=hybrid.current_node.detached_object)
 
-                    # obj_name = action.split()[1]
-                    # target_name = action.split()[2]
-                    # obj = sim_wrapper.object_dict[obj_name]
-                    #
-                    # if target_name in sim_wrapper.attach_dict and target_name in sim_wrapper.object_dict and obj in sim_wrapper.attach_dict[target_name]:
-                    #     target = sim_wrapper.object_dict[target_name]
-                    #     sim_wrapper.attach_dict[target_name].remove(obj)
-                    #     sim_wrapper.detach_constraint(obj, target)
-
-                #Sample and simulate motion execution
                 verb = (action or "").strip().split()[0].lower()
 
                 if verb not in {"cook", "clean"}:
@@ -353,15 +336,8 @@ def hybrid_tree_expansion(
 
                 sim_wrapper.scene.clear_debug_objects()
                 if domain_name=='kitchen':
-                    # print(f"detach_constraint with object {action.split()[1]}")
                     detached_object = sim_wrapper.scene.entities[sim_wrapper.object_dict[action.split()[1]]]
                     sim_wrapper.open_gripper(object=detached_object)
-
-                    # if "putdown" in action.split()[0]:
-                    #     attached_object = sim_wrapper.object_dict[action.split()[2]]
-                    #     if attached_object is not None:
-                    #         sim_wrapper.attach_constraint(detached_object, attached_object)
-                    #         sim_wrapper.attach_dict.setdefault(action.split()[2], []).append(detached_object)
 
                 child = ht.HybridNode(
                     discrete_belief=new_disc,
@@ -379,7 +355,6 @@ def hybrid_tree_expansion(
                     weight=1.0,
                     name=child_name
                 )
-                # logger.info(f"[hybrid_tree_expansion] child node {child_name} added")
 
                 # Check if the PDDL is satisfied (consistent)
                 satisfied, feedback = check_state(child, sim_wrapper, robot_name)
@@ -449,11 +424,7 @@ def hybrid_tree_expansion(
 
 
 def check_state(current_node, sim_wrapper, robot_name):
-    # print("checking state")
-    # print("current node:", current_node.name, "\n current discrete belief:", current_node.discrete_belief)
-    
     state = current_node.discrete_belief.get_grouped_facts()
-    # print("check_state grouped facts:", state, "discrete belief:", current_node.discrete_belief)
     feedback = []
     is_satisfied = True
 
@@ -503,7 +474,7 @@ def vlm_selector(domain, problem_pddl_path, model, candidates, current_node) -> 
     grouped_state = current_node.discrete_belief.get_grouped_facts()
     current_pddl_state = grouped_facts_to_str(grouped_state)
     current_image_paths = current_node.image_path
-    current_images = llm.encode_image(current_image_paths)
+    current_images = encode_image(current_image_paths)
     current_node_name = current_node.name
     prompt1 = f"For current node {current_node_name}, the symbolic PDDL state is: {current_pddl_state}"
     message_content = [{"type": "text", "text": prompt1}]
@@ -515,7 +486,7 @@ def vlm_selector(domain, problem_pddl_path, model, candidates, current_node) -> 
     # candidate nodes
     for i, candidate in enumerate(candidates):
         image_paths = candidate[0].image_path
-        images = llm.encode_image(image_paths)
+        images = encode_image(image_paths)
         grouped_state = candidate[0].discrete_belief.get_grouped_facts()
         state = grouped_facts_to_str(grouped_state)
         action = candidate[2]
@@ -616,7 +587,7 @@ def vlm_backtrack_selector(domain, method, problem_pddl_path, prob_num, prob_idx
 
     # current node images
     current_image_paths = current_node.image_path
-    current_images = llm.encode_image(current_image_paths)
+    current_images = encode_image(current_image_paths)
     current_node_name = current_node.name
     prompt2 = f"For current node ({current_node_name}), simulator-rendered images are:"
     message_content.append({"type": "text", "text": prompt2})
@@ -662,35 +633,3 @@ def vlm_backtrack_selector(domain, method, problem_pddl_path, prob_num, prob_idx
     if all_matches:
         return random.choice(all_matches)
     
-
-def extract_final_plan_with_params(hybrid: ht.HybridTree):
-    root = hybrid.root
-    goal = hybrid.current_node
-    if root is None or goal is None:
-        return []
-
-    try:
-        node_path = nx.shortest_path(hybrid.G, source=root, target=goal)
-    except nx.NetworkXNoPath:
-        return []
-
-    plan = []
-    for u, v in zip(node_path[:-1], node_path[1:]):
-        edata = hybrid.G.get_edge_data(u, v)
-        chosen_key, chosen_attrs = None, None
-        for k, attrs in edata.items():
-            if 'continuous_params' in attrs:
-                chosen_key, chosen_attrs = k, attrs
-                break
-        if chosen_attrs is None:
-            chosen_key, chosen_attrs = next(iter(edata.items()))
-
-        plan.append({
-            "action": chosen_key,
-            "feasible": bool(chosen_attrs.get("feasible", True)),
-            "continuous_params": chosen_attrs.get("continuous_params", {}),
-            "from_state": str(u.discrete_belief.state),
-            "to_state": str(v.discrete_belief.state),
-            "result_images": getattr(v, "image_path", None),
-        })
-    return plan

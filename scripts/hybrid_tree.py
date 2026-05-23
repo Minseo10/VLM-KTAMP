@@ -10,7 +10,6 @@ from belief_structs import DiscreteBelief
 from symbolic import is_goal_state_up
 
 
-@dataclass
 class HybridNode:
     def __init__(self, discrete_belief: DiscreteBelief, sim_state: Any, name: str = ""):
         self.discrete_belief = discrete_belief

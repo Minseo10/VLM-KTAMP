@@ -143,11 +143,15 @@ def get_grasp_pose(sim_wrapper, robot_name, object_name, grasp_type, belief, ran
     return pre_grasp, approach, obj_idx
 
 
-def get_grasp_ee(sim_wrapper, obj_idx):
+def get_grasp_ee(sim_wrapper, obj_idx, robot_name, left=True):
     """Get a pose of the obj w.r.t to the end-effector frame"""
 
     # ee pose w.r.t world frame
-    ee_link = sim_wrapper.robot.get_link(sim_wrapper.EE_FRAMES["ee"])
+    if robot_name == "dual_arm" or robot_name=="pr2":
+        link_name = sim_wrapper.EE_FRAMES['left'] if left else sim_wrapper.EE_FRAMES['right']
+    else:
+        link_name = sim_wrapper.EE_FRAMES['ee']
+    ee_link = sim_wrapper.robot.get_link(link_name)
     ee_pos_w = ee_link.get_pos().cpu().numpy()
     ee_quat_w = ee_link.get_quat().cpu().numpy()
     world_T_ee = gs.utils.geom.trans_quat_to_T(ee_pos_w, ee_quat_w)
@@ -203,7 +207,10 @@ def get_place_quat(sim_wrapper, robot_name, grasp_type, left=True):
 
     # random yaw values for side grasp
     elif grasp_type == 'side':
-        link_name = sim_wrapper.EE_FRAMES['left'] if left else sim_wrapper.EE_FRAMES['right']
+        if robot_name == "dual_arm" or robot_name=="pr2":
+            link_name = sim_wrapper.EE_FRAMES['left'] if left else sim_wrapper.EE_FRAMES['right']
+        else:
+            link_name = sim_wrapper.EE_FRAMES['ee']
         cur_q = sim_wrapper.robot.get_link(link_name).get_quat().cpu().detach().numpy().tolist()
         qw, qx, qy, qz = cur_q
 
@@ -401,7 +408,7 @@ def get_goal(sim_wrapper, robot, action, belief, left, grasp_type, domain_name='
             after_target_pose[0:3] -= move_height * approach
             after_target_pose = after_target_pose.tolist()
 
-            payload.update(ok=True, pose_traj=[grasp_pose_wxyz, target_pose, after_target_pose], approach=approach)
+            payload.update(ok=True, pose_traj=[grasp_pose_wxyz, target_pose, after_target_pose], approach=approach.tolist())
 
         elif act_type in ["putdown","stack","putdown_sink","putdown_stove","putdown_table"]:
             obj = params[0]
@@ -440,7 +447,7 @@ def get_goal(sim_wrapper, robot, action, belief, left, grasp_type, domain_name='
     return payload["ok"], payload
 
 
-def get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, subgoal_idx, node_name, sim_wrapper, action, goal_payload, domain_name, belief, left=True):
+def get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, node_name, sim_wrapper, action, goal_payload, domain_name, robot_name, belief, left=True):
     """
     Handle pickup and unstack actions (3 trajectories, close gripper)
     """
@@ -495,7 +502,7 @@ def get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, subgoal_i
             only_left=True
         )
         if not ok1:
-            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}", f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}")), node_name=node_name, world=belief.world if belief is not None else None)
             payload["image_path"] = file_path_list
             payload["error"] = f"Action {action}: motion planning failed when moving to pre grasp pose: {traj1_or_err}"
             logger.info(f"{traj1_or_err}")
@@ -512,7 +519,7 @@ def get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, subgoal_i
             only_left=True
         )
         if not ok2:
-            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}")), node_name=node_name, world=belief.world if belief is not None else None)
             payload["image_path"] = file_path_list
             payload["error"] = f"Action {action}: motion planning failed when moving closer to grasp pose: {traj2_or_err}"
             logger.info(f"{traj2_or_err}")
@@ -522,19 +529,24 @@ def get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, subgoal_i
         sim_wrapper.move(traj2, take_screenshot=False)
 
         # close gripper for pickup/unstack
-        sim_wrapper.close_gripper(object_name=object_name, attach=True)
+        sim_wrapper.close_gripper(object=object)
 
         # plan traj3: move away after grasping
+        ee_link_name = ""
+        if robot_name == "dual_arm" or robot_name=="pr2":
+            ee_link_name = sim_wrapper.EE_FRAMES['left'] if left else sim_wrapper.EE_FRAMES['right']
+        else:
+            ee_link_name = sim_wrapper.EE_FRAMES['ee']
         ok3, traj3_or_err = sim_wrapper.safe_plan(
             qpos_goal=sim_wrapper.ik(ee_pose3, left=left),
             planner="RRTConnect",
             ignore_collision=False,
             only_left=True,
-            ee_link_name=sim_wrapper.EE_FRAMES['ee'],
+            ee_link_name=ee_link_name,
             with_entity=object
         )
         if not ok3:
-            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}")), node_name=node_name, world=belief.world if belief is not None else None)
             payload["image_path"] = file_path_list
             payload["error"] = f"Action {action}: motion planning failed when moving away after grasping: {traj3_or_err}"
             logger.info(f"{traj3_or_err}")
@@ -544,8 +556,8 @@ def get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, subgoal_i
         sim_wrapper.move(traj3, take_screenshot=False)
 
         # capture the last state
-        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}", f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
-        payload.update(ok=True, traj=[traj1, traj2, traj3], image_path=file_path_list)
+        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}")), node_name=node_name, world=belief.world if belief is not None else None)
+        payload.update(ok=True, traj=[convert_traj_to_list(traj1), convert_traj_to_list(traj2), convert_traj_to_list(traj3)], image_path=file_path_list)
         return True, payload
 
     except Exception as e:
@@ -553,7 +565,7 @@ def get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, subgoal_i
         return False, payload
 
 
-def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_idx, node_name, sim_wrapper, action, goal_payload, domain_name, belief, left=True):
+def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, node_name, sim_wrapper, action, goal_payload, domain_name, robot_name, belief, left=True):
     """
     Handle putdown, stack, putdown_sink, putdown_stove, putdown_table actions (3 trajectories, open gripper)
     """
@@ -601,7 +613,11 @@ def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_id
 
         # plan traj1: move to pre-placement pose
         with_entity = object
-        ee_link_name = sim_wrapper.EE_FRAMES['ee']
+        ee_link_name = ""
+        if robot_name == "dual_arm" or robot_name=="pr2":
+            ee_link_name = sim_wrapper.EE_FRAMES['left'] if left else sim_wrapper.EE_FRAMES['right']
+        else:
+            ee_link_name = sim_wrapper.EE_FRAMES['ee']
         ok1, traj1_or_err = sim_wrapper.safe_plan(
             qpos_goal=sim_wrapper.ik(ee_pose1, left=left),
             qpos_start=joint_angle,
@@ -612,7 +628,7 @@ def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_id
             with_entity=with_entity
         )
         if not ok1:
-            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}")), node_name=node_name, world=belief.world if belief is not None else None)
             payload["image_path"] = file_path_list
             payload["error"] = f"Action {action}: motion planning failed when moving to pre placement pose: {traj1_or_err}"
             logger.info(f"{traj1_or_err}")
@@ -631,7 +647,7 @@ def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_id
             with_entity=with_entity
         )
         if not ok2:
-            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}")), node_name=node_name, world=belief.world if belief is not None else None)
             payload["image_path"] = file_path_list
             payload["error"] = f"Action {action}: motion planning failed when moving closer to placement pose: {traj2_or_err}"
             logger.info(f"{traj2_or_err}")
@@ -641,7 +657,7 @@ def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_id
         sim_wrapper.move(traj2, take_screenshot=False)
 
         # open gripper for putdown/stack actions
-        sim_wrapper.open_gripper(object_name=object_name, attach=True)
+        sim_wrapper.open_gripper(object=object)
 
         # plan traj3: move away after releasing
         ok3, traj3_or_err = sim_wrapper.safe_plan(
@@ -651,7 +667,7 @@ def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_id
             only_left=True
         )
         if not ok3:
-            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+            file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}")), node_name=node_name, world=belief.world if belief is not None else None)
             payload["image_path"] = file_path_list
             payload["error"] = f"Action {action}: motion planning failed when moving away after releasing: {traj3_or_err}"
             logger.info(f"{traj3_or_err}")
@@ -661,8 +677,8 @@ def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_id
         sim_wrapper.move(traj3, take_screenshot=False)
 
         # capture the last state
-        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
-        payload.update(ok=True, traj=[traj1, traj2, traj3], image_path=file_path_list, obj_target_pose=goal_payload.get("obj_target_pose"))
+        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}")), node_name=node_name, world=belief.world if belief is not None else None)
+        payload.update(ok=True, traj=[convert_traj_to_list(traj1), convert_traj_to_list(traj2), convert_traj_to_list(traj3)], image_path=file_path_list, obj_target_pose=goal_payload.get("obj_target_pose"))
         return True, payload
 
     except Exception as e:
@@ -670,7 +686,7 @@ def get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_id
         return False, payload
 
 
-def execute(method, prob_num, prob_idx, trial, repeat, subgoal_idx, node_name, domain_name, robot_name, sim_wrapper, action, belief=None, left=True, grasp_type='top'):
+def execute(method, prob_num, prob_idx, trial, repeat, node_name, domain_name, robot_name, sim_wrapper, action, belief=None, left=True, grasp_type='top'):
     """
     Main function to execute a high-level action: sample goal pose, plan path, then execute
     """
@@ -682,9 +698,9 @@ def execute(method, prob_num, prob_idx, trial, repeat, subgoal_idx, node_name, d
     
     # Route to appropriate get_path function based on action type
     if act_type in ["pickup", "unstack"]:
-        ok_path, path_payload = get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, subgoal_idx, node_name, sim_wrapper, action, goal_payload, domain_name, belief=belief, left=left)
+        ok_path, path_payload = get_path_pickup_unstack(method, prob_num, prob_idx, trial, repeat, node_name, sim_wrapper, action, goal_payload, domain_name, robot_name, belief=belief, left=left)
     elif act_type in ["putdown", "stack", "putdown_sink", "putdown_stove", "putdown_table"]:
-        ok_path, path_payload = get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, subgoal_idx, node_name, sim_wrapper, action, goal_payload, domain_name, belief=belief, left=left)
+        ok_path, path_payload = get_path_putdown_stack(method, prob_num, prob_idx, trial, repeat, node_name, sim_wrapper, action, goal_payload, domain_name, robot_name, belief=belief, left=left)
     else:
         return False, {"ok": False, "error": f"Unknown action type: {act_type}"}
     

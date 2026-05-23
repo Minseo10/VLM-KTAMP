@@ -1,4 +1,5 @@
 # from tf.transformations import quaternion_matrix
+import base64
 from attr import dataclass
 import numpy as np
 from scipy.spatial.transform import Rotation as R
@@ -625,3 +626,23 @@ def check_holding(sim_wrapper, obj, tol=0.06):
         return True
     return False
 
+
+def encode_image(image_path_list):
+    image_list = []
+    for image_path in image_path_list:
+        with open(image_path, "rb") as image_file:
+            image =  base64.b64encode(image_file.read()).decode("utf-8")
+            image_list.append(image)
+    return image_list
+
+def convert_traj_to_list(traj):
+    if not isinstance(traj, list):
+        return traj
+    
+    result = []
+    for item in traj:
+        if isinstance(item, torch.Tensor):
+            result.append(item.cpu().detach().tolist())
+        else:
+            result.append(item)
+    return result

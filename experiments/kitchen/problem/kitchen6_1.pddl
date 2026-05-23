@@ -1,26 +1,16 @@
-(define (problem cook-and-clean)
+(define (problem kitchen6_1)
     (:domain kitchen)
     (:objects
     )
     (:init
         (hand-empty)
         (flow-ok)
-
-        (is-table mytable)
-        (is-stove mystove)
-        (is-sink  mysink)
         (on egg mytable)
         (on bacon mytable)
         (on radish mytable)
         (on celery mytable)
         (on apple mytable)
         (on chicken mytable)
-        ;(on dis1 mytable)
-        ;(on dis2 mytable)
-        ;(on dis3 mytable)
-        ;(on dis4 mytable)
-        ;(on dis5 mytable)
-        ;(on dis6 mytable)
     )
     (:goal
         (and

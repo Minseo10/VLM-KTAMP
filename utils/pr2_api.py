@@ -25,7 +25,7 @@ COLOR_MAP = {
 }
 
 class PR2:
-    def __init__(self, ray_tracer=False):
+    def __init__(self, vis_sim=False):
 
         # Special configurations
         self.TOP_HOLDING_LEFT_ARM = [0.67717021, -0.34313199, 1.2, -1.46688405, 1.24223229, -1.95442826, 2.22254125]
@@ -65,7 +65,7 @@ class PR2:
                 max_FPS=200,
                 run_in_thread=True,
             ),
-            show_viewer=True, # if you turn this, results are not properly saved
+            show_viewer=vis_sim,
             show_FPS = False,
             sim_options=gs.options.SimOptions(
                 dt=0.01,
@@ -89,9 +89,6 @@ class PR2:
         )
         self.object_dict = {}
         self.region_dict = {"table": [[0.35, 0.70], [0.05, 0.65], [0.86, 0.87]]}
-
-        # Photo-realistic rendering
-        self.ray_tracer = ray_tracer
 
         # Define joints indices
         self.n_dofs = 30
@@ -126,8 +123,6 @@ class PR2:
                 fixed=True,
                 merge_fixed_links=False,
             ),
-            # vis_mode="collision",
-            # visualize_contact=True,
         )
 
         self.table = self.scene.add_entity(
@@ -139,7 +134,7 @@ class PR2:
                 fixed=True,
             ),
         )
-        self.object_dict["table"] = self.table
+        self.object_dict["table"] = self.table.idx
 
         # cameras
         self.cam_front = self.scene.add_camera(
@@ -269,13 +264,13 @@ class PR2:
         )
         return qpos
 
-    def motion_planning(self, qpos, left=True, holding=False, planner="RRTConnect", held_entity=None):
+    def motion_planning(self, qpos, left=True, holding=False, planner="RRTConnect", ee_link_name=None, with_entity=None):
         arm_dofs = self.left_arm if left else self.right_arm
 
         if holding:
-            path = self.robot.plan_path(qpos, planner=planner, ignore_collision=True, held_entity=held_entity)
+            path = self.robot.plan_path_ompl(qpos, planner=planner, ignore_collision=True, ee_link_name=ee_link_name, with_entity=with_entity)
         else:
-            path = self.robot.plan_path(qpos, planner=planner, held_entity=held_entity)
+            path = self.robot.plan_path_ompl(qpos, planner=planner, ee_link_name=ee_link_name, with_entity=with_entity)
 
         return path
 
@@ -292,15 +287,11 @@ class PR2:
                 for i in range(n)
             )
         else:
-            screenshot_indices = set()  # 스크린샷 찍지 않을 때
+            screenshot_indices = set()
 
-        # take_screenshot = True 이면 n등분 해서 사진 찍기
         for i, waypoint in enumerate(path):
             self.robot.control_dofs_position(waypoint)
             self.scene.step()
-            if self.ray_tracer:
-                self.cam_0.render()
-            # n등분 지점이라면 스크린샷 촬영
             if i in screenshot_indices and take_screenshot:
                 self.capture_screenshot(screenshot_dir, action_name, count)
                 count += 1
@@ -308,8 +299,6 @@ class PR2:
         # allow robot to reach the last waypoint
         for i in range(100):
             self.scene.step()
-            if self.ray_tracer:
-                self.cam_0.render()
 
     # TODO: ee link idx
     def current_ee_pose(self, left=True):
@@ -355,57 +344,7 @@ class PR2:
         points = np.column_stack((x_3d, y_3d, z_3d, rgb))
         return points
 
-    def save_pcd_file(self, points, save_dir="./pointclouds"):
-        """
-        Save a point cloud to a .pcd file using a custom ASCII format.
-
-        Parameters:
-            points: np.ndarray of shape (N, 6) where each row is [x, y, z, r, g, b].
-                    r, g, b are assumed to be in the range [0, 255].
-            filename: Name of the output .pcd file.
-            save_dir: Directory to save the file.
-
-        Returns:
-            pcd_file_path: The full path to the saved .pcd file.
-        """
-        # Ensure the save directory exists
-        os.makedirs(save_dir, exist_ok=True)
-        ts = int(time.time() * 1000)
-        pcd_file_path = os.path.join(save_dir, f"output_{ts}.pcd")
-
-        # Number of points
-        N = points.shape[0]
-
-        # Build PCD header string (PCD v0.7 format, ASCII)
-        header = (
-            "# .PCD v0.7 - Point Cloud Data file format\n"
-            "VERSION 0.7\n"
-            "FIELDS x y z rgb\n"
-            "SIZE 4 4 4 4\n"
-            "TYPE F F F U\n"
-            "COUNT 1 1 1 1\n"
-            f"WIDTH {N}\n"
-            "HEIGHT 1\n"
-            "VIEWPOINT 0 0 0 1 0 0 0\n"
-            f"POINTS {N}\n"
-            "DATA ascii\n"
-        )
-
-        # Open the file and write header and point data
-        with open(pcd_file_path, "w") as f:
-            f.write(header)
-            for row in points:
-                x, y, z, r, g, b = row
-                # Convert r, g, b to integers and pack them into a single unsigned int.
-                # The typical encoding: (r << 16) | (g << 8) | b.
-                rgb_int = (int(round(r)) << 16) | (int(round(g)) << 8) | int(round(b))
-                f.write(f"{x:.7f} {y:.7f} {z:.7f} {rgb_int}\n")
-
-        # print(f"Saved point cloud to: {pcd_file_path}")
-        return pcd_file_path
-
-
-    def safe_plan(self, qpos_goal, qpos_start=None, planner="RRTConnect", ignore_collision=False, only_left=False, only_right=False, held_entity=None):
+    def safe_plan(self, qpos_goal, qpos_start=None, planner="RRTConnect", ignore_collision=False, only_left=False, only_right=False, ee_link_name=None, with_entity=None):
         try:
             current_qpos = self.robot.get_qpos().detach()
             right_arm_fix = torch.tensor(
@@ -421,10 +360,10 @@ class PR2:
             final_traj = []
 
             if qpos_start is not None:
-                traj = self.robot.plan_path(qpos_goal=qpos_goal, qpos_start=qpos_start,
-                                       planner=planner, ignore_collision=ignore_collision)  # TODO: disabled held_entity for pr2 (just in case)
+                traj = self.robot.plan_path_ompl(qpos_goal=qpos_goal, qpos_start=qpos_start,
+                                       planner=planner, ignore_collision=ignore_collision)
             else:
-                traj = self.robot.plan_path(qpos_goal=qpos_goal,
+                traj = self.robot.plan_path_ompl(qpos_goal=qpos_goal,
                                        planner=planner, ignore_collision=ignore_collision)
             if traj is None or (hasattr(traj, "__len__") and len(traj) == 0):
                 return False, "empty_or_none_trajectory"
@@ -453,14 +392,14 @@ class PR2:
         except Exception as e:
             return False, f"{type(e).__name__}: {e}"
 
-    def save_snapshot4(self, save_to_dir, node_name):
+    def save_snapshot4(self, save_to_dir, node_name, world=None):
         self.cam_front.save_snapshot(save_to_filename=f"{save_to_dir}/{node_name}_front")
         self.cam_top.save_snapshot(save_to_filename=f"{save_to_dir}/{node_name}_top")
         self.cam_left.save_snapshot(save_to_filename=f"{save_to_dir}/{node_name}_left")
         self.cam_right.save_snapshot(save_to_filename=f"{save_to_dir}/{node_name}_right")
 
-        file_path_list = [f"{save_to_dir}/{node_name}_front_rgb.png", f"{save_to_dir}/{node_name}_top_rgb.png",
-                          f"{save_to_dir}/{node_name}_left_rgb.png", f"{save_to_dir}/{node_name}_right_rgb.png"]
+        file_path_list = [f"{save_to_dir}/{node_name}_front_rgb.jpg", f"{save_to_dir}/{node_name}_top_rgb.jpg",
+                          f"{save_to_dir}/{node_name}_left_rgb.jpg", f"{save_to_dir}/{node_name}_right_rgb.jpg"]
         for file_path in file_path_list:
             self.annotate_image(file_path, node_name)
 
@@ -475,7 +414,7 @@ def to_wxyz(q_xyzw):
     # PyBullet: (x, y, z, w) → Genesis: (w, x, y, z)
     return (q_xyzw[3], q_xyzw[0], q_xyzw[1], q_xyzw[2])
 
-def start_sim(json_path, method, prob_num, prob_idx, trial, repeat):
+def start_sim(json_path, method, prob_num, prob_idx, trial, repeat, vis_sim=False):
     # load json file and bring entry
     with open(json_path, "r", encoding="utf-8") as f:
         meta = json.load(f)
@@ -487,7 +426,7 @@ def start_sim(json_path, method, prob_num, prob_idx, trial, repeat):
 
     # Initialize
     gs.init(backend=gs.gpu)
-    pr2 = PR2()
+    pr2 = PR2(vis_sim=vis_sim)
 
     # add object
     pr2.object_dict = getattr(pr2, "object_dict", {})
@@ -505,7 +444,7 @@ def start_sim(json_path, method, prob_num, prob_idx, trial, repeat):
                 color=col,
             ),
         )
-        pr2.object_dict[name] = ent
+        pr2.object_dict[name] = ent.idx
 
     # Build the scene
     pr2.scene.build()
@@ -547,7 +486,8 @@ def start_sim(json_path, method, prob_num, prob_idx, trial, repeat):
 
     # set pose of the blocks
     for name, info in blocks_info.items():
-        ent = pr2.object_dict[name]
+        idx = pr2.object_dict[name]
+        ent = pr2.scene.entities[idx]
         pos = np.array(info["pose"]["position"], dtype=float)
         q_xyzw = info["pose"]["quaternion"]
         q_wxyz = np.array(to_wxyz(q_xyzw), dtype=float)
