@@ -1,6 +1,8 @@
 [submodule "LLM-TAMP"]
-	path = LLM-TAMP
-	url = https://github.com/Minseo10/LLM-TAMP.git
+        path = LLM-TAMP
+        url = https://github.com/Minseo10/LLM-TAMP.git
+        branch = main
 [submodule "pddlstream"]
-	path = pddlstream
-	url = https://github.com/Minseo10/pddlstream.git
+        path = pddlstream
+        url = https://github.com/Minseo10/pddlstream.git
+        branch = main
