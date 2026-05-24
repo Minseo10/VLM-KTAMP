@@ -83,7 +83,7 @@ The currently supported experiment modes are:
 - `ours`: our VLM-KTAMP planner
 - `ours_ablation`: ablation variant of our planner without VLM backtracking
 - `llm3`: an LLM-based TAMP baseline using the `LLM-TAMP` submodule ([paper](https://arxiv.org/abs/2403.11552)).
-- `pddlstream`: a traditional TAMP baseline using the `pddlstream` submodule ([paper] (https://arxiv.org/abs/1802.08705)).
+- `pddlstream`: a traditional TAMP baseline using the `pddlstream` submodule ([paper](https://arxiv.org/abs/1802.08705)).
 
 
 ### Run Our Planner
