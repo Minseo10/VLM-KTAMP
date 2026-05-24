@@ -35,7 +35,7 @@ We use [Genesis](https://github.com/Genesis-Embodied-AI/genesis-world) for physi
 pip uninstall genesis-world
 git clone https://github.com/Minseo10/genesis-world.git
 cd Genesis
-pip install -e '.[render]'
+pip install -e ".[dev]"
 ```
 
 ### 4. Build Fast Downward Inside PDDLStream
