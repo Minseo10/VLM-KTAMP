@@ -29,9 +29,10 @@ conda activate genesis_new
 
 ### 3. Install Genesis
 
-We use [Genesis](https://genesis-world.readthedocs.io/en/latest/) for physics simulation.
+We use [Genesis](https://github.com/Genesis-Embodied-AI/genesis-world) for physics simulation. If you have already installed genesis using `pip install genesis-world`, make sure to uninstall it, and then clone the modified repository and install locally.
 
 ```bash
+pip uninstall genesis-world
 git clone https://github.com/Minseo10/genesis-world.git
 cd Genesis
 pip install -e '.[render]'
@@ -73,7 +74,6 @@ You can leave `org` blank.
 
 ## Running Experiments
 
-
 ```bash
 python run.py --help
 ```
@@ -82,8 +82,9 @@ The currently supported experiment modes are:
 
 - `ours`: our VLM-KTAMP planner
 - `ours_ablation`: ablation variant of our planner without VLM backtracking
-- `llm3`: an LLM-based TAMP baseline: https://arxiv.org/abs/2403.11552
-- `pddlstream`: a traditional TAMP baseline: https://arxiv.org/abs/1802.08705
+- `llm3`: an LLM-based TAMP baseline using the `LLM-TAMP` submodule ([paper](https://arxiv.org/abs/2403.11552)).
+- `pddlstream`: a traditional TAMP baseline using the `pddlstream` submodule ([paper] (https://arxiv.org/abs/1802.08705)).
+
 
 ### Run Our Planner
 
@@ -100,6 +101,7 @@ python run.py \
 	--model gpt-4o \
 	--vis_sim True
 ```
+
 
 ### Run the Ablation Variant
 
@@ -131,6 +133,7 @@ python run.py \
 	--model gpt-4o
 ```
 
+
 ### Run the PDDLStream Baseline
 
 ```bash
@@ -143,29 +146,27 @@ python run.py \
 	--timeout_seconds 600
 ```
 
-
 ## Parameters
 
 The root runner `run.py` supports the following arguments.
 
-- `domain`: experiment domain. Current choices are `blocksworld_pr` and `kitchen`.
-- `method`: experiment method. Current choices are `ours`, `ours_ablation`, `llm3`, and `pddlstream`.
-- `prob_complexity`: list of problem complexities to run. The supported range is 3 to 6.
-- `prob_idx`: list of problem instance indices. Supported values are 1 to 5 for `blocksworld_pr`, and 1 for `kitchen`.
-- `trial_range`: list of trial indices to run. Object configurations differ across trials. Supported values are 1 to 2 for `blocksworld_pr`, and 1 to 10 for `kitchen`.
-- `K`: maximum number of randomized replanning attempts. Default is 5.
-- `plan_number`: number of candidate symbolic plans generated for discrete state graph generation. Default is 30.
-- `timeout_seconds`: timeout for each run. Default is 600 seconds.
+- `domain`: Experiment domain. Current choices are `blocksworld_pr` and `kitchen`.
+- `method`: Experiment method. Current choices are `ours`, `ours_ablation`, `llm3`, and `pddlstream`.
+- `prob_complexity`: List of problem complexities to run, which is determined by the number of objects. The supported range is 3 to 6.
+- `prob_idx`: List of problem instance indices. Supported values are 1 to 5 for `blocksworld_pr`, and 1 for `kitchen`.
+- `trial_range`: List of trial indices to run. Object configurations differ across trials. Supported values are 1 to 2 for `blocksworld_pr`, and 1 to 10 for `kitchen`.
+- `K`: Maximum number of randomized replanning attempts. Default is 5.
+- `plan_number`: Number of candidate symbolic plans generated for discrete state graph generation. Default is 30.
+- `timeout_seconds`: Timeout for each run. Default is 600 seconds.
 - `model`: VLM model name. Default is `gpt-4o`.
-- `vis_sim`: whether to open the Genesis visualization during execution. Default is `True`. This is intended for `ours` and `ours_ablation`.
+- `vis_sim`: Whether to open the Genesis visualization during execution. Default is `True`. This is intended for `ours` and `ours_ablation`.
 
 
 ## Contact
-Please contact `tahitiro2@gmail.com` if you have any questions.
+For questions, please contact Minseo at <tahitiro2@gmail.com>.
 
 
 ## Citation
-
 
 IEEE ICRA 2026, [Kinodynamic Task and Motion Planning using VLM-guided and Interleaved Sampling](https://arxiv.org/abs/2510.26139)
 
