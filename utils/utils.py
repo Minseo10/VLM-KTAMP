@@ -646,3 +646,11 @@ def convert_traj_to_list(traj):
         else:
             result.append(item)
     return result
+
+def create_file(client, file_path):
+  with open(file_path, "rb") as file_content:
+    result = client.files.create(
+        file=file_content,
+        purpose="vision",
+    )
+    return result.id

@@ -10,6 +10,8 @@ logger = logging.getLogger("TAMP")
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from utils.utils import *
+from tool_use_env import *
+from find_dice_env import *
 
 
 GRASP_LENGTH = 0.03
@@ -709,3 +711,97 @@ def execute(method, prob_num, prob_idx, trial, repeat, node_name, domain_name, r
 
     return True, path_payload
 
+
+def execute_trajectory(method, prob_num, prob_idx, trial, repeat, subgoal_idx, node_name, sim_wrapper, traj, action_type, obj_name, domain_name='tool_use', belief=None, tamp_solution=None, sampled_particle_indices=None):
+    payload = {
+        "ok": False,
+        "where": "path",
+        "act_type": action_type,
+        "traj": traj,
+        "obs": None,
+        "error": None,
+    }
+
+    if sampled_particle_indices is None:
+        sampled_particle_indices = {}
+
+    if traj is None:
+        payload["error"] = "trajectory is None"
+        return False, payload
+
+    if action_type in ["pickup", "unstack"]:
+        sim_wrapper.move(traj[0], take_screenshot=False)
+        sim_wrapper.move(traj[1], take_screenshot=False)
+        sim_wrapper.close_gripper(object_name=obj_name, attach=True)
+        sim_wrapper.move(traj[2], take_screenshot=False)
+        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+
+        if domain_name == 'tool_use' and belief is not None:
+            obj_idx = sim_wrapper.object_dict.get(obj_name)
+            grasped_obj_idx = sampled_particle_indices.get(obj_idx, obj_idx)
+            grasp = get_grasp_ee(sim_wrapper, grasped_obj_idx)
+            payload["obs"] = HookObservation(conf=traj[0][-1], grasp=grasp, grasped_obj=grasped_obj_idx, image_path=file_path_list)
+        elif domain_name == 'find_dice' and belief is not None:
+            obj_idx = sim_wrapper.object_dict.get(obj_name)
+            grasped_obj_idx = sampled_particle_indices.get(obj_idx, obj_idx)  # TODO: sampling for find_dice domain
+            grasp = get_grasp_ee(sim_wrapper, grasped_obj_idx)
+            payload["obs"] = SceneObservation(conf=traj[0][-1], grasp=grasp, grasped_obj=grasped_obj_idx, image_path=file_path_list)
+        payload["ok"] = True
+        return True, payload
+
+    if action_type in ["putdown", "stack", "putdown_sink", "putdown_stove", "putdown_table"]:
+        sim_wrapper.move(traj[0], take_screenshot=False)
+        sim_wrapper.move(traj[1], take_screenshot=False)
+        sim_wrapper.open_gripper(object_name=obj_name, attach=True)
+        sim_wrapper.move(traj[2], take_screenshot=False)
+        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+
+        if domain_name == 'tool_use' and belief is not None:
+            payload["obs"] = HookObservation(conf=traj[0][-1], grasp=None, poses={belief.grasped_obj: tamp_solution.get("obj_target_pose")}, image_path=file_path_list)
+        elif domain_name == 'find_dice' and belief is not None:
+            payload["obs"] = SceneObservation(conf=traj[0][-1], grasp=None, poses={belief.grasped_obj: tamp_solution.get("obj_target_pose")}, image_path=file_path_list, moved=belief.grasped_obj)
+
+        payload["ok"] = True
+        return True, payload
+
+    if action_type in ["pull_towards"]:
+        sim_wrapper.move(traj[0], take_screenshot=False)
+        sim_wrapper.move(traj[1], take_screenshot=False)
+        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+
+        if domain_name == 'tool_use' and belief is not None:
+            hook_traj = tamp_solution.get("hook_traj")
+            payload["obs"] = HookObservation(
+                conf=traj[1][-1],
+                grasp=belief.grasp,
+                grasped_obj=belief.grasped_obj,
+                hook_traj=hook_traj,
+                image_path=file_path_list
+            )
+
+        payload["ok"] = True
+        return True, payload
+    
+    if action_type in ["look_around", "look_inside"]:
+        sim_wrapper.move(traj[0], take_screenshot=False)
+        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+
+        if domain_name == 'find_dice' and belief is not None:
+            camera_image = belief.world.franka.get_image(segment=True)
+            obs = obs_from_camera_image(belief.world, camera_image, traj[0])
+            obs.conf = traj[0]
+        payload["ok"] = True
+        return True, payload
+
+    if action_type in ["go_home"]:
+        sim_wrapper.move(traj[0], take_screenshot=False)
+        file_path_list = sim_wrapper.save_snapshot4(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "experiments", domain_name, method, "screenshots", f"{prob_num}_{prob_idx}_{trial}_{repeat}",f"subgoal{subgoal_idx}")), node_name=node_name, world=belief.world if belief is not None else None)
+
+        if domain_name == 'find_dice' and belief is not None:
+                payload["obs"] = SceneObservation(conf=traj[0][-1], grasp=belief.grasp, grasped_obj=belief.grasped_obj, image_path=file_path_list)
+
+        payload["ok"] = True
+        return True, payload
+
+    payload["error"] = f"Unknown action type: {action_type}"
+    return False, payload
