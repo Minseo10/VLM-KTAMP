@@ -1,0 +1,555 @@
+[
+  {
+    "problem_name": "blocksworld_pr3_1",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/blocksworld_pr/problem/blocksworld_pr3_1.pddl",
+    "num": 3,
+    "index": 1,
+    "trial": 1,
+    "table_body": 2,
+    "objects": {
+      "green": {
+        "bid": 3,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.76
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "blue": {
+        "bid": 4,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.76
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "red": {
+        "bid": 5,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.84
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "green": "table",
+      "blue": "table",
+      "red": "green"
+    },
+    "goal_on": {
+      "blue": "table",
+      "green": "table",
+      "red": "blue"
+    }
+  },
+  {
+    "problem_name": "blocksworld_pr3_6",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/blocksworld_pr/problem/blocksworld_pr3_6.pddl",
+    "num": 3,
+    "index": 6,
+    "trial": 1,
+    "table_body": 2,
+    "objects": {
+      "blue": {
+        "bid": 3,
+        "size": [
+          0.08,
+          0.08,
+          0.08
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.76
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "green": {
+        "bid": 4,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+           -0.55,
+            -0.65,
+            0.84
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "red": {
+        "bid": 5,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.92
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "blue": "table",
+      "green": "blue",
+      "red": "green"
+    },
+    "goal_on": {
+      "red": "table",
+      "green": "red",
+      "blue": "green"
+    }
+  },
+  {
+    "problem_name": "blocksworld_pr4_6",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/blocksworld_pr/problem/blocksworld_pr4_6.pddl",
+    "num": 4,
+    "index": 6,
+    "trial": 1,
+    "table_body": 2,
+    "objects": {
+      "blue": {
+        "bid": 3,
+        "size": [
+          0.08,
+          0.08000000000000007,
+          0.08
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.76
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "green": {
+        "bid": 4,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            1.00
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apricot": {
+        "bid": 5,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.84
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "yellow": {
+        "bid": 6,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.92
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "blue": "table",
+      "apricot": "blue",
+      "yellow": "apricot",
+      "green": "yellow"
+    },
+    "goal_on": {
+      "green": "table",
+      "yellow": "green",
+      "apricot": "yellow",
+      "blue": "apricot"
+    }
+  },
+  {
+    "problem_name": "blocksworld_pr5_6",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/blocksworld_pr/problem/blocksworld_pr5_6.pddl",
+    "num": 5,
+    "index": 6,
+    "trial": 1,
+    "table_body": 2,
+    "objects": {
+      "blue": {
+        "bid": 3,
+        "size": [
+          0.08,
+          0.08,
+          0.08
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.76
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "green": {
+        "bid": 4,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.76
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "white": {
+        "bid": 5,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.84
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "red": {
+        "bid": 6,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.84
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "yellow": {
+        "bid": 7,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.92
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "green": "table",
+      "blue": "table",
+      "red": "green",
+      "white": "blue",
+      "yellow": "red"
+    },
+    "goal_on": {
+      "green": "yellow",
+      "red": "table",
+      "yellow": "table",
+      "blue": "red",
+      "white": "blue"
+    }
+  },
+  {
+    "problem_name": "blocksworld_pr6_6",
+    "pddl_path": "/home/minseo/robot_ws/src/tamp_llm/experiments/blocksworld_pr/problem/blocksworld_pr6_6.pddl",
+    "num": 6,
+    "index": 6,
+    "trial": 1,
+    "table_body": 2,
+    "objects": {
+      "yellow": {
+        "bid": 3,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.76
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "blue": {
+        "bid": 4,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.84
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "green": {
+        "bid": 5,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.76
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "apricot": {
+        "bid": 6,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.84
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "white": {
+        "bid": 7,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.65,
+            0.92
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "red": {
+        "bid": 8,
+        "size": [
+          0.08000000000000007,
+          0.08000000000000007,
+          0.08000000000000007
+        ],
+        "pose": {
+          "position": [
+            -0.55,
+            -0.40,
+            0.92
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "init_surfaces": {
+      "green": "table",
+      "yellow": "table",
+      "apricot": "green",
+      "blue": "yellow",
+      "red": "apricot",
+      "white": "blue"
+    },
+    "goal_on": {
+      "apricot": "table",
+      "white": "table",
+      "yellow": "apricot",
+      "red": "white",
+      "blue": "yellow",
+      "green": "red"
+    }
+  }
+]

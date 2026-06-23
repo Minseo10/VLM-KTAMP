@@ -37,11 +37,12 @@ def run(domain="blocksworld_pr",
     
     problems_meta_json = str(EXPERIMENTS_DIR / domain / "problem" / "problems_meta.json")
     
-    if method in ["ours", "ours_ablation"]:
-        method_name = "ours" if method == "ours" else "ours_ablation"
+    if method in ["ours", "ours_ablation", "dual_arm"]:
+        if method == "dual_arm":
+            problems_meta_json = str(EXPERIMENTS_DIR / domain / "problem" / "problems_meta_dual_arm.json")
         run_ours_batch(
             domain=domain,
-            method=method_name,
+            method=method,
             problems_meta_json=problems_meta_json,
             prob_num_range=prob_num_range,
             prob_idx_range=prob_idx_range,

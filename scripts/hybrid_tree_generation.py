@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger("TAMP")
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from utils import prompts, pr2_api as pr2, kuka_api as kuka
+from utils import prompts, pr2_api as pr2, kuka_api as kuka, dual_arm_api as da
 from utils.utils import *
 from collections import defaultdict, deque
 from typing import Any, List, Tuple
@@ -251,6 +251,8 @@ def hybrid_tree_expansion(
             sim_wrapper, root_image_paths = pr2.start_sim(json_path, method, prob_num, prob_idx, trial, repeat, vis_sim=vis_sim)
     elif robot_name == 'kuka':
             sim_wrapper, root_image_paths = kuka.start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distractor=num_distractor, vis_sim=vis_sim)
+    elif robot_name == 'dual_arm':
+        sim_wrapper, root_image_paths = da.start_sim(json_path, method, prob_num, prob_idx, trial, repeat, num_distractor=num_distractor, vis_sim=vis_sim)
     init_scene = sim_wrapper.scene.sim.get_state()
 
     start = time.time()

@@ -225,6 +225,8 @@ def run_ours_batch(domain="blocksworld_pr",
     
     ablation = (method == "ablation")
     robot_name = "pr2" if domain == "blocksworld_pr" else "kuka"
+    if domain == "blocksworld_pr" and method == "dual_arm":
+        robot_name = "dual_arm"
     num_distractor = 12 if domain == "kitchen" else 0
     
     repeat_range = range(1, 2)
